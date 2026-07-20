@@ -1,0 +1,11 @@
+{
+  "name": "com.juahn.v2.services",
+  "displayName": "Services",
+  "author": "armadimon",
+  "version": "0.1.0",
+  "unity": "6000.0",
+  "license": "MIT",
+  "type": "library",
+  "description": "Layer 1 Unity infrastructure and dependency injection: service locator, typed message broker, tick/coroutine/time services and a bootstrapper composition root. Standalone with no external dependencies.",
+  "dependencies": {}
+}
