@@ -18,7 +18,21 @@ namespace Juahn.V2.Services
                 throw new ArgumentNullException(nameof(instance), $"Cannot bind a null instance to {typeof(T)}.");
             }
 
-            BindInternal(typeof(T), instance);
+            BindInternal(typeof(T), instance, requireInterface: true);
+
+            return this;
+        }
+
+        /// <inheritdoc />
+        public IServiceRegistry BindSelf<T>(T instance) where T : class
+        {
+            if (instance == null)
+            {
+                throw new ArgumentNullException(nameof(instance), $"Cannot bind a null instance to {typeof(T)}.");
+            }
+
+            // 구체 타입을 자기 자신 키로 바인딩한다(서비스 로케이터 용도). 인터페이스 제약을 건너뛴다.
+            BindInternal(typeof(T), instance, requireInterface: false);
 
             return this;
         }
@@ -36,8 +50,8 @@ namespace Juahn.V2.Services
             EnsureAssignable<T1>(instance);
             EnsureAssignable<T2>(instance);
 
-            BindInternal(typeof(T1), instance);
-            BindInternal(typeof(T2), instance);
+            BindInternal(typeof(T1), instance, requireInterface: true);
+            BindInternal(typeof(T2), instance, requireInterface: true);
 
             return this;
         }
@@ -58,9 +72,9 @@ namespace Juahn.V2.Services
             EnsureAssignable<T2>(instance);
             EnsureAssignable<T3>(instance);
 
-            BindInternal(typeof(T1), instance);
-            BindInternal(typeof(T2), instance);
-            BindInternal(typeof(T3), instance);
+            BindInternal(typeof(T1), instance, requireInterface: true);
+            BindInternal(typeof(T2), instance, requireInterface: true);
+            BindInternal(typeof(T3), instance, requireInterface: true);
 
             return this;
         }
@@ -147,11 +161,11 @@ namespace Juahn.V2.Services
             _factories.Clear();
         }
 
-        private void BindInternal(Type type, object instance)
+        private void BindInternal(Type type, object instance, bool requireInterface)
         {
-            if (!type.IsInterface)
+            if (requireInterface && !type.IsInterface)
             {
-                throw new ArgumentException($"Cannot bind {instance} because {type} is not an interface.");
+                throw new ArgumentException($"Cannot bind {instance} because {type} is not an interface. Use BindSelf for concrete-type registration.");
             }
 
             if (_bindings.ContainsKey(type) || _factories.ContainsKey(type))

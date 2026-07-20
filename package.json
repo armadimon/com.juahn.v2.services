@@ -2,7 +2,7 @@
   "name": "com.juahn.v2.services",
   "displayName": "Services",
   "author": "armadimon",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "unity": "6000.0",
   "license": "MIT",
   "type": "library",

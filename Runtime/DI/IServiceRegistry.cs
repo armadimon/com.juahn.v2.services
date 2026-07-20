@@ -22,6 +22,15 @@ namespace Juahn.V2.Services
         IServiceRegistry Bind<T>(T instance) where T : class;
 
         /// <summary>
+        /// Binds a CONCRETE type <typeparamref name="T"/> to the given <paramref name="instance"/> under its own type key.
+        /// Unlike <see cref="Bind{T}"/> this does not require <typeparamref name="T"/> to be an interface,
+        /// enabling service-locator style registration of concrete classes.
+        /// </summary>
+        /// <exception cref="ArgumentException">Thrown if <typeparamref name="T"/> is already bound.</exception>
+        /// <returns>This registry to allow chained calls.</returns>
+        IServiceRegistry BindSelf<T>(T instance) where T : class;
+
+        /// <summary>
         /// Binds two interfaces to the same <paramref name="instance"/>.
         /// </summary>
         /// <exception cref="ArgumentException">

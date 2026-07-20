@@ -38,6 +38,12 @@ namespace Juahn.V2.Services
             return Container.Bind(instance);
         }
 
+        /// <inheritdoc cref="IServiceRegistry.BindSelf{T}" />
+        public static IServiceRegistry BindSelf<T>(T instance) where T : class
+        {
+            return Container.BindSelf(instance);
+        }
+
         /// <inheritdoc cref="IServiceRegistry.Clean{T}" />
         public static bool Clean<T>() where T : class
         {
