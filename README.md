@@ -1,4 +1,11 @@
-# Services (com.juahn.v2.services)
+# Services (com.juahn.v2.services) — DEPRECATED
+
+> ⚠️ **DEPRECATED.** 이 번들 패키지는 도메인별 독립 패키지로 분리되었습니다. 신규 프로젝트는 아래를 사용하세요:
+> - **com.juahn.v2.di** — 서비스 로케이터/IoC + 부트스트래퍼
+> - **com.juahn.v2.messaging** — 타입 pub/sub 메시지 브로커
+> - **com.juahn.v2.timing** — Tick / Time / Coroutine 서비스
+>
+> (선택) VContainer 연동은 **com.juahn.v2.vcontainer**. 네임스페이스는 동일하게 `Juahn.V2.Services`라 코드 이관 부담이 적습니다.
 
 Layer 1 of the **JuahnFrameworkV2** stack: Unity infrastructure and dependency injection.
 
